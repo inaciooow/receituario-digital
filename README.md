@@ -1,35 +1,52 @@
 # 🩺 Receituário Digital — UBS Família da Placa
 
-Ferramenta web para preenchimento e impressão de receituários médicos da **Unidade Básica de Saúde da Família da Placa**, em Rio do Pires / BA.
+> Ferramenta web para preenchimento e impressão de receituários médicos da Unidade Básica de Saúde da Família da Placa, município de Rio do Pires / BA.
 
-Desenvolvida para substituir o processo manual de preenchimento em PDF, permitindo que a médica preencha os dados diretamente no navegador e imprima com um clique — gerando automaticamente as **duas vias** do receituário em uma única folha A4.
+[![GitHub Pages](https://img.shields.io/badge/Acesse%20o%20projeto-online-2d6a4f?style=for-the-badge&logo=github)](https://inaciooow.github.io/receituario-digital-ubs/)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-🔗 **[Acessar a ferramenta online](https://seu-usuario.github.io/receituario-ubs)**
+---
+
+## 📌 Sobre o projeto
+
+A UBS Família da Placa utilizava um modelo de receituário em PDF que precisava ser preenchido manualmente e reimpresso a cada consulta. Este projeto substituiu esse fluxo por uma **ferramenta web leve, sem instalação e sem dependências**, acessível diretamente pelo navegador.
+
+A médica preenche os dados, visualiza o resultado em tempo real e imprime com um clique — gerando as **duas vias do receituário lado a lado** em uma única folha A4, exatamente no formato exigido pela unidade.
 
 ---
 
 ## ✨ Funcionalidades
 
-- **Pré-visualização em tempo real** — o receituário é atualizado instantaneamente conforme o preenchimento
-- **Duas vias simultâneas** — imprime as duas cópias lado a lado em uma única página A4
-- **Data automática** — preenchida com a data de hoje, editável quando necessário
-- **Formato de data por extenso** — exibe no padrão *Rio do Pires, 5 de maio de 2026*
-- **Blocos de medicamentos dinâmicos** — adicione ou remova quantos quiser, com renumeração automática
-- **Contador de caracteres** — alerta visual quando o texto se aproxima do limite do balão
-- **Impressão limpa** — oculta a interface e imprime apenas o receituário, sem cabeçalhos do navegador
-- **Zero dependências** — HTML, CSS e JavaScript puros, sem frameworks ou bibliotecas externas
+| Funcionalidade | Descrição |
+|---|---|
+| Pré-visualização em tempo real | O receituário é atualizado instantaneamente conforme o preenchimento |
+| Duas vias simultâneas | Imprime as duas cópias lado a lado em uma única página A4 |
+| Data automática | Preenchida com a data de hoje, editável quando necessário |
+| Data por extenso | Exibe no formato *Rio do Pires, 5 de maio de 2026* |
+| Medicamentos dinâmicos | Adicione ou remova quantos quiser, com renumeração automática |
+| Contador de caracteres | Alerta visual quando o texto se aproxima do limite do balão |
+| Impressão limpa | Oculta a interface e imprime apenas o receituário, sem cabeçalhos do navegador |
+| Zero dependências | HTML, CSS e JavaScript puros — sem frameworks ou bibliotecas externas |
+
+---
+
+## 🖥️ Demo
+
+🔗 **[https://inaciooow.github.io/receituario-digital-ubs/](https://inaciooow.github.io/receituario-digital-ubs/)**
 
 ---
 
 ## 🗂️ Estrutura do projeto
 
 ```
-receituario-ubs/
-├── index.html              # Estrutura principal (HTML semântico + acessível)
+receituario-digital-ubs/
+├── index.html              # Estrutura principal — HTML semântico e acessível
 ├── css/
-│   └── style.css           # Estilos organizados com variáveis CSS
+│   └── style.css           # Design system com variáveis CSS e BEM parcial
 ├── js/
-│   └── app.js              # Lógica da aplicação (ES6+, comentado)
+│   └── app.js              # Lógica da aplicação — ES6+, funções documentadas
 ├── assets/
 │   ├── logo-prefeitura.png # Logo da Prefeitura de Rio do Pires
 │   └── logo-sus.png        # Logo do SUS
@@ -38,77 +55,33 @@ receituario-ubs/
 
 ---
 
-## 🚀 Como publicar no GitHub (passo a passo)
-
-### 1. Criar o repositório
-
-1. Acesse [github.com](https://github.com) e faça login
-2. Clique em **New repository** (botão verde no canto superior direito)
-3. Dê o nome `receituario-ubs`
-4. Deixe como **Public**
-5. Clique em **Create repository**
-
-### 2. Subir os arquivos
-
-Na página do repositório recém-criado, clique em **uploading an existing file** e arraste **os arquivos e pastas** extraídos do `.zip`:
-
-```
-index.html
-README.md
-css/          ← pasta inteira
-js/           ← pasta inteira
-assets/       ← pasta inteira
-```
-
-> ⚠️ **Não suba o arquivo `.zip`** — suba os arquivos e pastas soltos.
-
-Clique em **Commit changes** para salvar.
-
-### 3. Ativar o GitHub Pages
-
-1. No repositório, clique em **Settings**
-2. No menu lateral, clique em **Pages**
-3. Em *Source*, selecione **Deploy from a branch**
-4. Em *Branch*, selecione **main** e a pasta **/ (root)**
-5. Clique em **Save**
-
-Após 1 a 2 minutos, o site estará disponível em:
-
-```
-https://seu-usuario.github.io/receituario-ubs
-```
-
-> 💡 Substitua `seu-usuario` pelo seu nome de usuário do GitHub.
-
----
-
 ## 🛠️ Tecnologias
 
-| Tecnologia | Uso |
-|---|---|
-| HTML5 semântico | Estrutura e acessibilidade (`aria-label`, roles) |
-| CSS3 com variáveis | Design system, layout Grid, responsividade e `@media print` |
-| JavaScript ES6+ | Manipulação de DOM, estado da aplicação, formatação de dados |
+**HTML5 semântico** — uso de `<header>`, `<aside>`, `<main>`, `<article>`, `<section>` e `<footer>`, com atributos `aria-label` e `role` para acessibilidade.
+
+**CSS3** — variáveis CSS para design system centralizado, layout com CSS Grid, classes no padrão BEM parcial e `@media print` dedicado com `@page { margin: 0 }` para impressão sem cabeçalhos do navegador.
+
+**JavaScript ES6+** — `const`/`let`, funções com responsabilidade única, comentários JSDoc e manipulação de DOM sem jQuery ou qualquer biblioteca.
 
 ---
 
-## 🎨 Decisões de design
+## 🎨 Decisões técnicas
 
-- **BEM (Block Element Modifier)** parcial nas classes CSS para legibilidade
-- **Variáveis CSS** centralizando cores, tipografia e espaçamentos
-- **`const`/`let`** e funções com responsabilidade única no JS
-- **`aria-*` e roles semânticos** para acessibilidade básica
-- **`@page { margin: 0 }`** para remover cabeçalhos/rodapés automáticos do navegador na impressão
+- **Sem frameworks** — o projeto é simples o suficiente para não justificar React, Vue ou similares; manter em Vanilla JS garante leveza e longevidade
+- **Estado em memória** — array `medIds` controla a ordem dos blocos de medicamento, permitindo renumeração correta após remoções
+- **BEM parcial** — classes como `.receipt-section__title` e `.btn--primary` facilitam a leitura sem a rigidez total do BEM
+- **Impressão via CSS** — toda a lógica de impressão é resolvida em CSS, sem bibliotecas de PDF ou janelas especiais
 
 ---
 
-## 📋 Contexto
+## 📋 Contexto real
 
-Este projeto foi desenvolvido para uso real na UBS Família da Placa, atendendo uma demanda concreta da equipe de saúde do município de Rio do Pires, BA. O objetivo foi criar uma solução simples, leve e que funcione sem instalação — basta acessar o link.
+Projeto desenvolvido para uso real na UBS Família da Placa, atendendo uma demanda concreta da equipe de saúde do município de Rio do Pires, BA. A solução foi desenhada para rodar em qualquer computador da unidade, sem instalação, servidor ou configuração — basta abrir o link.
 
 ---
 
 ## 👨‍💻 Autor
 
 **Jorge Inácio**  
-Engenheiro de Computação
+Engenheiro de Computação  
+[![GitHub](https://img.shields.io/badge/GitHub-inaciooow-181717?style=flat&logo=github)](https://github.com/inaciooow)
