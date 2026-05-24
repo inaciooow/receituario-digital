@@ -12,6 +12,34 @@
 'use strict';
 
 /* ============================================================
+   UNIDADES
+   ============================================================ */
+const DOCTOR = {
+  name:    'Dra. Virgínia Rodrigues Azevedo',
+  crm:     'CRM-BA 49896',
+  role:    'Médica',
+};
+
+const UNITS = {
+  ubs: {
+    label:    'UBS Família da Placa',
+    address:  'Comunidade de Placa – Rio do Pires – BA',
+    orgLine1: 'Secretaria Municipal de Saúde',
+    orgLine2: 'Unidade Básica de Saúde da Família da Placa',
+    city:     'Rio do Pires',
+  },
+  hospital: {
+    label:    'Hospital Municipal de Rio do Pires',
+    address:  'Av. Clemente Pereira da Silva, 42, Centro – Rio do Pires – BA',
+    orgLine1: 'Secretaria Municipal de Saúde',
+    orgLine2: 'Hospital Municipal de Rio do Pires',
+    city:     'Rio do Pires',
+  },
+};
+
+let currentUnit = 'ubs';
+
+/* ============================================================
    CONSTANTES
    ============================================================ */
 const CHAR_LIMIT = 220;
@@ -38,6 +66,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // Atualiza a pré-visualização a cada mudança nos inputs
   document.addEventListener('input', updatePreview);
 });
+
+/**
+ * Atualiza a unidade selecionada e o card do emitente
+ * @param {HTMLInputElement} radio
+ */
+function selectUnit(radio) {
+  currentUnit = radio.value;
+  const unit  = UNITS[currentUnit];
+
+  // Atualiza destaque visual nas opções
+  document.querySelectorAll('.unit-option').forEach(el => {
+    el.classList.remove('unit-option--selected');
+  });
+  radio.closest('.unit-option').classList.add('unit-option--selected');
+
+  // Atualiza o card do emitente
+  document.getElementById('emitente-name').innerHTML =
+    `${DOCTOR.name} <span class="emitente-card__crm">(${DOCTOR.crm})</span>`;
+  document.getElementById('emitente-address').textContent = unit.address;
+  document.getElementById('emitente-unit').textContent    = unit.label;
+
+  updatePreview();
+}
 
 /** Preenche o campo de data com a data de hoje */
 function setTodayDate() {
@@ -147,12 +198,17 @@ function updatePreview() {
   const dateValue   = document.getElementById('date-input')?.value ?? '';
   const dateLabel   = formatDatePT(dateValue);
   const medications = collectMedications();
+  const unit        = UNITS[currentUnit];
 
   // Aplica nas duas vias
   ['copy-1', 'copy-2'].forEach(copyId => {
-    setTextContent(`${copyId}-patient`, patientName || '—');
-    setTextContent(`${copyId}-date`,    dateLabel);
-    renderMedBoxes(`${copyId}-meds`,    medications);
+    setTextContent(`${copyId}-patient`,  patientName || '—');
+    setTextContent(`${copyId}-date`,     dateLabel);
+    setTextContent(`${copyId}-emitente`, `${DOCTOR.name} (${DOCTOR.crm})\n${unit.address}`);
+    setTextContent(`${copyId}-org`,      `${unit.orgLine1}\n${unit.orgLine2}`);
+    setTextContent(`${copyId}-sig-name`, DOCTOR.name);
+    setTextContent(`${copyId}-sig-role`, `${DOCTOR.role} – ${DOCTOR.crm}`);
+    renderMedBoxes(`${copyId}-meds`,     medications);
   });
 }
 
@@ -208,7 +264,8 @@ function formatDatePT(isoDate) {
   const [year, month, day] = isoDate.split('-').map(Number);
   const monthName = MONTHS_PT[month - 1];
 
-  return `Rio do Pires, ${day} de ${monthName} de ${year}`;
+  const city = UNITS[currentUnit]?.city || 'Rio do Pires';
+  return `${city}, ${day} de ${monthName} de ${year}`;
 }
 
 /* ============================================================
@@ -253,3 +310,4 @@ function setTextContent(id, text) {
   const el = document.getElementById(id);
   if (el) el.textContent = text;
 }
+
