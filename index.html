@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ferramenta digital para preenchimento e impressão de receituários médicos — UBS Família da Placa, Rio do Pires / BA">
+  <meta name="description" content="Ferramenta digital para preenchimento e impressão de receituários médicos — UBS Família da Placa, Rio do Pires – Bahia">
   <meta name="author" content="Jorge Inácio">
   <title>Receituário Digital — UBS Família da Placa</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,17 +29,38 @@
     <!-- ── SIDEBAR (formulário) ── -->
     <aside class="sidebar" aria-label="Formulário do receituário">
 
-      <!-- Emitente (fixo) -->
-      <section aria-labelledby="emitente-label">
-        <p class="section-label" id="emitente-label">Emitente</p>
-        <div class="emitente-card">
-          <p class="emitente-card__name">
+      <!-- Unidade emissora -->
+      <section aria-labelledby="unit-label">
+        <p class="section-label" id="unit-label">Unidade emissora</p>
+        <div class="unit-selector" role="radiogroup" aria-label="Selecione a unidade">
+
+          <label class="unit-option unit-option--selected" id="unit-option-ubs">
+            <input type="radio" name="unit" value="ubs" checked onchange="selectUnit(this)">
+            <div class="unit-option__info">
+              <p class="unit-option__name">UBS Família da Placa</p>
+              <p class="unit-option__address">Comunidade de Placa – Rio do Pires – BA</p>
+            </div>
+          </label>
+
+          <label class="unit-option" id="unit-option-hospital">
+            <input type="radio" name="unit" value="hospital" onchange="selectUnit(this)">
+            <div class="unit-option__info">
+              <p class="unit-option__name">Hospital Municipal de Rio do Pires</p>
+              <p class="unit-option__address">Av. Clemente Pereira da Silva, 42, Centro – Rio do Pires – BA</p>
+            </div>
+          </label>
+
+        </div>
+
+        <!-- Médico da unidade selecionada -->
+        <div class="emitente-card" style="margin-top:10px;">
+          <p class="emitente-card__name" id="emitente-name">
             Dra. Virgínia Rodrigues Azevedo
             <span class="emitente-card__crm">(CRM-BA 49896)</span>
           </p>
-          <p class="emitente-card__address">Comunidade de Placa – Rio do Pires / BA</p>
+          <p class="emitente-card__address" id="emitente-address">Comunidade de Placa – Rio do Pires – BA</p>
+          <p class="emitente-card__unit" id="emitente-unit">UBS Família da Placa</p>
         </div>
-        <p class="emitente-card__lock" aria-hidden="true">🔒 Dados fixos da unidade</p>
       </section>
 
       <!-- Data da prescrição -->
@@ -129,10 +150,8 @@
                 alt="SUS — Sistema Único de Saúde"
               >
             </div>
-            <p class="receipt-header__org">
-              Secretaria Municipal de Saúde<br>
-              Unidade Básica de Saúde da Família da Placa
-            </p>
+            <p class="receipt-header__org" id="copy-1-org" style="white-space:pre-line;">Secretaria Municipal de Saúde
+Unidade Básica de Saúde da Família da Placa</p>
           </header>
 
           <div class="receipt-via">
@@ -144,10 +163,8 @@
 
           <section class="receipt-section">
             <h2 class="receipt-section__title">Emitente</h2>
-            <p class="receipt-section__text">
-              Dra. Virgínia Rodrigues Azevedo (CRM-BA 49896)
-              Comunidade de Placa – Rio do Pires / BA
-            </p>
+            <p class="receipt-section__text" id="copy-1-emitente" style="white-space:pre-line;">Dra. Virgínia Rodrigues Azevedo (CRM-BA 49896)
+Comunidade de Placa – Rio do Pires – BA</p>
           </section>
 
           <section class="receipt-section">
@@ -162,8 +179,8 @@
 
           <footer class="receipt-signature">
             <div class="receipt-signature__line" aria-hidden="true"></div>
-            <p class="receipt-signature__name">Dra. Virgínia Rodrigues Azevedo</p>
-            <p class="receipt-signature__role">Médica – CRM-BA 49896</p>
+            <p class="receipt-signature__name" id="copy-1-sig-name">Dra. Virgínia Rodrigues Azevedo</p>
+            <p class="receipt-signature__role" id="copy-1-sig-role">Médica – CRM-BA 49896</p>
             <p class="receipt-signature__date" id="copy-1-date"></p>
           </footer>
         </article>
@@ -183,10 +200,8 @@
                 alt="SUS — Sistema Único de Saúde"
               >
             </div>
-            <p class="receipt-header__org">
-              Secretaria Municipal de Saúde<br>
-              Unidade Básica de Saúde da Família da Placa
-            </p>
+            <p class="receipt-header__org" id="copy-2-org" style="white-space:pre-line;">Secretaria Municipal de Saúde
+Unidade Básica de Saúde da Família da Placa</p>
           </header>
 
           <div class="receipt-via">
@@ -198,10 +213,8 @@
 
           <section class="receipt-section">
             <h2 class="receipt-section__title">Emitente</h2>
-            <p class="receipt-section__text">
-              Dra. Virgínia Rodrigues Azevedo (CRM-BA 49896)
-              Comunidade de Placa – Rio do Pires / BA
-            </p>
+            <p class="receipt-section__text" id="copy-2-emitente" style="white-space:pre-line;">Dra. Virgínia Rodrigues Azevedo (CRM-BA 49896)
+Comunidade de Placa – Rio do Pires – BA</p>
           </section>
 
           <section class="receipt-section">
@@ -216,8 +229,8 @@
 
           <footer class="receipt-signature">
             <div class="receipt-signature__line" aria-hidden="true"></div>
-            <p class="receipt-signature__name">Dra. Virgínia Rodrigues Azevedo</p>
-            <p class="receipt-signature__role">Médica – CRM-BA 49896</p>
+            <p class="receipt-signature__name" id="copy-2-sig-name">Dra. Virgínia Rodrigues Azevedo</p>
+            <p class="receipt-signature__role" id="copy-2-sig-role">Médica – CRM-BA 49896</p>
             <p class="receipt-signature__date" id="copy-2-date"></p>
           </footer>
         </article>
