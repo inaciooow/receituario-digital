@@ -22,8 +22,8 @@
   --radius-md: 6px;
   --radius-lg: 8px;
 
-  --font-sans: 'DM Sans', sans-serif;
-  --font-serif: 'Source Serif 4', serif;
+  --font-sans: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
 }
 
 /* ── Reset ── */
@@ -38,6 +38,72 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   min-height: 100vh;
+}
+
+
+/* ============================================================
+   SELETOR DE UNIDADE
+   ============================================================ */
+.unit-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.unit-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  background: var(--color-input-bg);
+}
+
+.unit-option:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.unit-option input[type="radio"] {
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+  width: auto;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.unit-option__info { flex: 1; }
+
+.unit-option__name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.4;
+}
+
+.unit-option__address {
+  font-size: 0.67rem;
+  color: #777;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.unit-option--selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+/* Emitente card dinâmico */
+.emitente-card__unit {
+  font-size: 0.67rem;
+  color: #888;
+  margin-top: 3px;
+  font-style: italic;
 }
 
 /* ============================================================
@@ -519,3 +585,4 @@ body {
     width: 100%;
   }
 }
+
