@@ -23,7 +23,7 @@ const DOCTOR = {
 const UNITS = {
   ubs: {
     label:    'UBS Família da Placa',
-    address:  'Comunidade de Placa – Rio do Pires – Bahia',
+    address:  'Comunidade de Placa, Rio do Pires – Bahia',
     orgLine1: 'Secretaria Municipal de Saúde',
     orgLine2: 'Unidade Básica de Saúde da Família da Placa',
     city:     'Rio do Pires',
@@ -32,7 +32,7 @@ const UNITS = {
   },
   hospital: {
     label:    'Hospital Municipal de Rio do Pires',
-    address:  'Av. Clemente Pereira da Silva, 42, Centro – Rio do Pires – Bahia',
+    address:  'Av. Clemente Pereira da Silva, 42, Rio do Pires – Bahia',
     orgLine1: 'Secretaria Municipal de Saúde',
     orgLine2: 'Hospital Municipal de Rio do Pires',
     city:     'Rio do Pires',
@@ -41,9 +41,9 @@ const UNITS = {
   },
   hpac: {
     label:    'Hospital Padre Aldo Coppola',
-    address:  'Av. Padre Aldo Coppola, 1000 – Ibitiara – Bahia',
+    address:  'Av. Padre Aldo Coppola, 1000, Ibitiara – Bahia',
     orgLine1: 'Hospital Padre Aldo Coppola',
-    orgLine2: 'Sociedade Assistencial Beneficente de Ibitiara',
+    orgLine2: 'Sociedade Assistencial e Beneficente de Ibitiara',
     city:     'Ibitiara',
     logoPref: 'assets/logo-hpac.png',
     logoAlt:  'Hospital Padre Aldo Coppola',
