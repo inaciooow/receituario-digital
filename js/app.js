@@ -43,7 +43,7 @@ const UNITS = {
     label:    'Hospital Padre Aldo Coppola',
     address:  'Av. Padre Aldo Coppola, 1000 – Ibitiara – Bahia',
     orgLine1: 'Hospital Padre Aldo Coppola',
-    orgLine2: '',
+    orgLine2: 'Sociedade Assistencial Beneficente de Ibitiara',
     city:     'Ibitiara',
     logoPref: 'assets/logo-hpac.png',
     logoAlt:  'Hospital Padre Aldo Coppola',
