@@ -1,5 +1,5 @@
 /* ============================================================
-   Receituário Digital — UBS Família da Placa
+   Receituário Digital
    Autor: Jorge Inácio
    ============================================================ */
 
@@ -453,8 +453,12 @@ body {
 .receipt-via__title {
   font-size: 0.9rem;
   font-weight: 800;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.08em;
   color: #111;
+  padding-bottom: 6px;
+  border-bottom: 1.5px solid #ccc;
+  display: block;
+  width: 100%;
 }
 
 .receipt-via__subtitle {
