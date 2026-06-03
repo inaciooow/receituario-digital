@@ -1,5 +1,5 @@
 /**
- * Receituário Digital — UBS Família da Placa
+ * Receituário Digital — Rio do Pires / Ibitiara
  * Autor: Jorge Inácio
  *
  * Responsabilidades:
@@ -15,25 +15,38 @@
    UNIDADES
    ============================================================ */
 const DOCTOR = {
-  name:    'Dra. Virgínia Rodrigues Azevedo',
-  crm:     'CRM-BA 49896',
-  role:    'Médica',
+  name: 'Dra. Virgínia Rodrigues Azevedo',
+  crm:  'CRM-BA 49896',
+  role: 'Médica',
 };
 
 const UNITS = {
   ubs: {
     label:    'UBS Família da Placa',
-    address:  'Comunidade de Placa – Rio do Pires – BA',
+    address:  'Comunidade de Placa – Rio do Pires – Bahia',
     orgLine1: 'Secretaria Municipal de Saúde',
     orgLine2: 'Unidade Básica de Saúde da Família da Placa',
     city:     'Rio do Pires',
+    logoPref: 'assets/logo-prefeitura.png',
+    logoAlt:  'Prefeitura de Rio do Pires',
   },
   hospital: {
     label:    'Hospital Municipal de Rio do Pires',
-    address:  'Av. Clemente Pereira da Silva, 42, Centro – Rio do Pires – BA',
+    address:  'Av. Clemente Pereira da Silva, 42, Centro – Rio do Pires – Bahia',
     orgLine1: 'Secretaria Municipal de Saúde',
     orgLine2: 'Hospital Municipal de Rio do Pires',
     city:     'Rio do Pires',
+    logoPref: 'assets/logo-prefeitura.png',
+    logoAlt:  'Prefeitura de Rio do Pires',
+  },
+  hpac: {
+    label:    'Hospital Padre Aldo Coppola',
+    address:  'Av. Padre Aldo Coppola, 1000 – Ibitiara – Bahia',
+    orgLine1: 'Hospital Padre Aldo Coppola',
+    orgLine2: '',
+    city:     'Ibitiara',
+    logoPref: 'assets/logo-hpac.png',
+    logoAlt:  'Hospital Padre Aldo Coppola',
   },
 };
 
@@ -67,8 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('input', updatePreview);
 });
 
+/* ============================================================
+   SELEÇÃO DE UNIDADE
+   ============================================================ */
+
 /**
- * Atualiza a unidade selecionada e o card do emitente
+ * Atualiza a unidade selecionada, o card do emitente e os logos
  * @param {HTMLInputElement} radio
  */
 function selectUnit(radio) {
@@ -81,14 +98,17 @@ function selectUnit(radio) {
   });
   radio.closest('.unit-option').classList.add('unit-option--selected');
 
-  // Atualiza o card do emitente
-  document.getElementById('emitente-name').innerHTML =
-    `${DOCTOR.name} <span class="emitente-card__crm">(${DOCTOR.crm})</span>`;
+  // Atualiza o card do emitente na sidebar
+  document.getElementById('emitente-name').textContent    = DOCTOR.name;
   document.getElementById('emitente-address').textContent = unit.address;
   document.getElementById('emitente-unit').textContent    = unit.label;
 
   updatePreview();
 }
+
+/* ============================================================
+   DATA
+   ============================================================ */
 
 /** Preenche o campo de data com a data de hoje */
 function setTodayDate() {
@@ -97,6 +117,20 @@ function setTodayDate() {
   const mm    = String(today.getMonth() + 1).padStart(2, '0');
   const dd    = String(today.getDate()).padStart(2, '0');
   document.getElementById('date-input').value = `${yyyy}-${mm}-${dd}`;
+}
+
+/**
+ * Converte uma string de data ISO (YYYY-MM-DD) para o formato
+ * "Cidade, D de mês de YYYY"
+ * @param {string} isoDate
+ * @returns {string}
+ */
+function formatDatePT(isoDate) {
+  if (!isoDate) return '';
+  const [year, month, day] = isoDate.split('-').map(Number);
+  const monthName = MONTHS_PT[month - 1];
+  const city = UNITS[currentUnit]?.city || 'Rio do Pires';
+  return `${city}, ${day} de ${monthName} de ${year}`;
 }
 
 /* ============================================================
@@ -192,6 +226,17 @@ function handleMedInput(id) {
    PRÉ-VISUALIZAÇÃO
    ============================================================ */
 
+/**
+ * Atualiza o logo da unidade nas duas vias
+ * @param {object} unit
+ */
+function updateLogos(unit) {
+  document.querySelectorAll('.receipt-header__logo-pref').forEach(img => {
+    img.src = unit.logoPref;
+    img.alt = unit.logoAlt;
+  });
+}
+
 /** Atualiza ambas as vias do receituário com os dados do formulário */
 function updatePreview() {
   const patientName = getInputValue('patient-name');
@@ -200,12 +245,20 @@ function updatePreview() {
   const medications = collectMedications();
   const unit        = UNITS[currentUnit];
 
+  // Atualiza logos
+  updateLogos(unit);
+
+  // Texto do cabeçalho da unidade — quando orgLine2 está vazio mostra só orgLine1
+  const orgText = unit.orgLine2
+    ? `${unit.orgLine1}\n${unit.orgLine2}`
+    : unit.orgLine1;
+
   // Aplica nas duas vias
   ['copy-1', 'copy-2'].forEach(copyId => {
     setTextContent(`${copyId}-patient`,  patientName || '—');
     setTextContent(`${copyId}-date`,     dateLabel);
-    setTextContent(`${copyId}-emitente`, `${DOCTOR.name} (${DOCTOR.crm})\n${unit.address}`);
-    setTextContent(`${copyId}-org`,      `${unit.orgLine1}\n${unit.orgLine2}`);
+    setTextContent(`${copyId}-emitente`, `${DOCTOR.name}\n${DOCTOR.crm}\n${unit.address}`);
+    setTextContent(`${copyId}-org`,      orgText);
     setTextContent(`${copyId}-sig-name`, DOCTOR.name);
     setTextContent(`${copyId}-sig-role`, `${DOCTOR.role} – ${DOCTOR.crm}`);
     renderMedBoxes(`${copyId}-meds`,     medications);
@@ -246,26 +299,6 @@ function renderMedBoxes(containerId, medications) {
     box.textContent = text;
     container.appendChild(box);
   });
-}
-
-/* ============================================================
-   FORMATAÇÃO DE DATA
-   ============================================================ */
-
-/**
- * Converte uma string de data ISO (YYYY-MM-DD) para o formato
- * "Rio do Pires, D de mês de YYYY"
- * @param {string} isoDate
- * @returns {string}
- */
-function formatDatePT(isoDate) {
-  if (!isoDate) return '';
-
-  const [year, month, day] = isoDate.split('-').map(Number);
-  const monthName = MONTHS_PT[month - 1];
-
-  const city = UNITS[currentUnit]?.city || 'Rio do Pires';
-  return `${city}, ${day} de ${monthName} de ${year}`;
 }
 
 /* ============================================================
@@ -310,4 +343,3 @@ function setTextContent(id, text) {
   const el = document.getElementById(id);
   if (el) el.textContent = text;
 }
-
